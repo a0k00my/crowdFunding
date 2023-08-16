@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contribution</title>
+</head>
+<body>
+<section>
+    <div class="card mr-3 ml-2">
+        <div class="card-body">
+            <h1 class="text-center">Contribution</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#PrijectID</th>
+                    <th scope="col">Project Title</th>
+                    <th scope="col">Contribution Amount</th>
+                    <th scope="col">Transferred</th>
+                    <th scope="col">Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c : ${contribution}">
+
+
+                    <th scope="row" th:text="${'PR-'+c.project.id}">1</th>
+                    <td th:text="${c.project.title}">Otto</td>
+                    <td th:text="${c.amount}">@mdo</td>
+                    <td th:text="${c.transferred}">Otto</td>
+                    <td th:text="${#dates.format(c.createdDate, 'dd-MM-yyyy')}">Created Date</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

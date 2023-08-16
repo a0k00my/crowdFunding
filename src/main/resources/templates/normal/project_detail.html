@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+</head>
+<body>
+<section>
+    <div class="card mr-3 ml-2" th:if="${projectDetail}">
+        <div class="card-body" >
+            <div class="container">
+                <h2>Project Details</h2>
+
+                <table class="table project_table">
+                    <tr>
+                        <th class="text-left" scope="row">ID</th>
+                        <td class="text-left" th:text="${'PR-' + projectDetail.id}"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left" scope="row">Title</th>
+                        <td class="text-left" th:text="${projectDetail.title}"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left" scope="row">Description</th>
+                        <td class="text-left" th:text="${projectDetail.description}"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left" scope="row">Requested Amount</th>
+                        <td class="text-left" th:text="${projectDetail.requestedAmount}"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left" scope="row">Total Contribution</th>
+                        <td class="text-left">
+                            <span th:text="${projectDetail.totalContribution}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-left" scope="row">Current Amount</th>
+                        <td class="text-left" th:text="${projectDetail.currentAmount}"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left" scope="row">Status</th>
+                        <td class="text-left" th:text="${projectDetail.status}"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left" scope="row">Created Date</th>
+                        <td class="text-left" th:text="${#dates.format(projectDetail.createdDate, 'dd-MM-yyyy')}"></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left" scope="row">End Date</th>
+                        <td class="text-left" th:text="${#dates.format(projectDetail.endDate, 'dd-MM-yyyy')}"></td>
+                    </tr>
+                </table>
+
+
+                <div th:if="${projectDetail.requestedAmount > projectDetail.totalContribution}" >
+                    <h2>Contributions</h2>
+                    <form  action="" th:action="@{'/user/contribution/project/'+${projectDetail.id}}" method="post" th:object="${contribution}">
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input
+                                    name="amount"
+                                    type="number"
+                                    class="form-control"
+                                    id="amount_field"
+                                    aria-describedby="emailHelp"
+                                    placeholder="Enter your contribution"
+                                    th:value="${contribution.amount}"
+                            />
+
+                        </div>
+
+                        <div class="container">
+                            <button type="submit" class="btn bg-primary text-white">
+                                Submit
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+<!--                <div class="container mt-3">-->
+<!--                    <button th:onclick="|deleteProject(${projectDetail.id})|" class="btn btn-danger btn-sm">Delete</button>-->
+<!--                    <button class="btn btn-primary btn-sm">Update</button>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+    <h1 class="text-center p-3 bg-danger text-white" th:unless="${projectDetail}">You don't have permission to see the details</h1>
+</section>
+
+</body>
+</html>

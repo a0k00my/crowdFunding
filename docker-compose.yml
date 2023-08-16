@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    environment:
+      DATABASE_HOST: docker-mysql
+      DATABASE_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: funding
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+
+  app:
+    build: .
+    image: cwowdfundingapp:0.0.2
+    container_name: cwowdfundingapp-container
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/funding?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME : admin
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - db

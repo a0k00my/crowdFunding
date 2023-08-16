@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+</head>
+<body>
+<section>
+    <div class="card mr-3 ml-2">
+        <div class="card-body">
+            <h1 class="text-center">Project</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">RequestedAmount</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">CreatedDate</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="p : ${projects}">
+
+
+                    <th scope="row" th:text="${'PR-'+p.id}">1</th>
+
+                    <td>
+                        <a href="#" th:href="@{'/project/'+${p.id}}">
+                            <span th:text="${p.title}">Mark</span>
+                        </a>
+                    </td>
+
+                    <td th:text="${p.description}">Otto</td>
+                    <td th:text="${p.requestedAmount}">@mdo</td>
+                    <td th:text="${p.status}">Otto</td>
+                    <td th:text="${#dates.format(p.createdDate, 'dd-MM-yyyy')}">Created Date</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

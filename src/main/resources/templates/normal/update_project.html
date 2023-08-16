@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+</head>
+<body>
+<section>
+    <div class="card mr-3 ml-3" th:if="${project}">
+
+        <div class="card-body">
+            <h1 class="text-center">Update Project</h1>
+            <div class="container-fluid mt-1">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <form action="#"
+                              th:object="${project}"
+                              enctype="multipart/form-data"
+                              method="POST"
+                              th:action="@{'/user/project/'+${project.id}}+'/details'"
+                              class="mt-2"
+                        >
+                            <input type="hidden" th:value="${project.id}", name="id"/>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                </div>
+                                <input th:value="${project.title}" type="text" id="title" name="title" placeholder="Enter project title" class="form-control" />
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                </div>
+                                <textarea th:text="${project.description}" id="description" name="description" rows="10" placeholder="Enter project description" class="form-control"></textarea>
+                            </div>
+
+                            <div class="input-group mt-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa fa-plus"></i>
+                                    </div>
+                                </div>
+                                <input th:value="${project.requestedAmount}" type="number" id="requestedAmount" name="requestedAmount" placeholder="Enter request amount" class="form-control" />
+                            </div>
+                            <div class="container text-center">
+                                <button class="btn btn-outline-primary"> Save</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <h1 class="text-center p-3 bg-danger text-white" th:unless="${project}">You don't have permission</h1>
+</section>
+
+</body>
+</html>
