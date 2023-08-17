@@ -9,8 +9,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -20,7 +24,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         CustomUserDetails customUserDetails = new CustomUserDetails(user);
-        System.out.println("CD = "+customUserDetails);
         return customUserDetails;
     }
 }
