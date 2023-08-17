@@ -1,0 +1,37 @@
+# IntelliJ IDEA
+.idea/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Maven
+target/
+*.iml
+*.ipr
+*.iws
+
+# Spring Boot Gradle Plugin
+build/
+.gradle/
+*.log
+gradle/
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+
+# IDE-specific files
+.vscode/
+
+# Compiled Java class files
+*.class
+
+# Logs
+*.log
